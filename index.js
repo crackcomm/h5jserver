@@ -13,14 +13,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/action/store', function(req, res) {
-  storeAction(req.body);
+  store.add(req.body);
   res.json(req.body);
 });
 
 app.get('/action/store/:id', function(req, res) {
   var id = req.param('id');
-  if (id in store) {
-    var action = getAction(id);
+  if (id in store.actions) {
+    var action = store.get(id);
     res.json(action);
   } else {
     res.status(404).json({error: 'Not found'});
@@ -29,8 +29,8 @@ app.get('/action/store/:id', function(req, res) {
 
 app.all('/action/run/:id', function(req, res) {
   var id = req.param('id');
-  if (id in store) {
-    var action = getAction(id);
+  if (id in store.actions) {
+    var action = store.get(id);
     h5.run(action, req.query).
       then(function(result) {
         res.json(result);

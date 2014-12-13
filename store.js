@@ -1,28 +1,32 @@
 
-var actions = module.exports = {};
+function Store() {
+  this.actions = {};
+}
 
-function storeAction(action) {
-  var _action = actions[action.id] = {
+Store.prototype.add = function(action) {
+  var _action = this.actions[action.id] = {
     id: action.id,
     function: action.function
   };
   
   if (action.next) {
     _action.next = action.next.id;
-    storeAction(action.next);
+    this.add(action.next);
   }
-}
+};
 
-function getAction(id) {
-  var action = actions[id];
+Store.prototype.get = function(id) {
+  var action = this.actions[id];
   var _action = {
     id: id,
     function: action.function
   };
 
   if (action.next) {
-    _action.next = getAction(action.next);
+    _action.next = this.get(action.next);
   }
 
   return _action;
-}
+};
+
+module.exports = new Store();
