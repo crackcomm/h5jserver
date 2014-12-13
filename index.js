@@ -1,8 +1,8 @@
 var bodyParser = require('body-parser');
 var store = require('./store.js');
 var express = require('express');
-var h5 = require('../h5js');
-require('../h5js/examples/functions');
+var h5 = require('h5');
+require('h5/examples/functions');
 
 h5.debug(true);
 
