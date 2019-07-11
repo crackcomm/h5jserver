@@ -13,7 +13,7 @@
     "express": "^4.10.5",
     "body-parser": "^1.10.0",
     "h5": "x.x.x",
-    "cheerio": "^0.18.0"
+    "cheerio": "^0.20.0"
   },
   "engines": {
     "node": "0.10.x"
